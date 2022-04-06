@@ -2,6 +2,7 @@ import Layout from '../../components/Layout/layout';
 import ProductItem from './ProductsItem/productItem';
 
 import { getAllIds, getById } from './../../lib/products';
+import { handlerAddToBookmarks } from '../../lib/utils'; 
 
 import { config } from '../../config';
 
@@ -25,7 +26,7 @@ export default function Product({product}){
 
   return(
     <Layout>
-      <ProductItem data={item}></ProductItem>
+      <ProductItem addToBookmarks={handlerAddToBookmarks} data={item}></ProductItem>
     </Layout>
   )
 }

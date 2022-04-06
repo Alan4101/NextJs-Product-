@@ -1,15 +1,26 @@
 .sliderItem{
-  box-shadow: -4px 2px 19px -10px rgb(0 0 0 / 52%);
+  box-shadow: 1px 1px 14px -4px rgba(0,0,0,0.75);
   padding: 1rem;
+  margin: 1rem;
 }
 .imgBlock{
   width: 200px;
   height: 200px;
+  text-align: center;
+  margin: 0 auto;
 }
 .imgBlock>img{
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.sliderLink{
+  
+}
+.sliderLink:hover{
+  text-decoration: underline;
+  text-decoration-color: aquamarine;
+  transition: all .5s linear;
 }
 .textBlock{
 

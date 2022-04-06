@@ -12,11 +12,6 @@ export async function getServerSideProps() {
     props: {data}, 
   }
 }
-// async function get (){
-//   const data = await getAll(config.urlApi, 'posts')
-//   console.log(...data)
-// }
-// get()
 export default function ProductList({data}){
 
   const settings = {
@@ -24,7 +19,8 @@ export default function ProductList({data}){
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3
+    slidesToScroll: 3,
+    arrows: true
   };
   
   return (
@@ -35,7 +31,7 @@ export default function ProductList({data}){
           {
             data.map(el=>
               (
-                <SliderItem data={el}></SliderItem>
+                <SliderItem key={el.id} data={el}></SliderItem>
               )
             )
           }

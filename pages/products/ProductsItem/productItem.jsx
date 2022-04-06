@@ -1,6 +1,6 @@
 import styles from './productsItem.module.css'
 
-export default function ProductItem({data}){
+export default function ProductItem({data , addToBookmarks}){
 
 const {img, id, title, body} = data
   return(
@@ -13,7 +13,7 @@ const {img, id, title, body} = data
         </div>
         <article className={styles.textBlock}>
           <p>{body}</p>
-          <button className='p-btn'>Add to bockmarks</button>
+          <button onClick={()=> addToBookmarks(id)} className='p-btn'>Add to bockmarks</button>
         </article>
       </div>
       
