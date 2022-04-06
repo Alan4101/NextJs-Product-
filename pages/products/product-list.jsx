@@ -1,9 +1,23 @@
-import { Layout } from "../../components/Layout/layout";
+import Layout from "../../components/Layout/layout";
 import Slider from "react-slick";
 
+import { getAll } from "../../lib/products";
 
+import { config } from "../../config";
+import SliderItem from './../../components/SliderItem/sliderItem';
 
-export default function ProductList(){
+export async function getServerSideProps() {
+  const data = await getAll(config.urlApi, 'posts')
+  return {
+    props: {data}, 
+  }
+}
+// async function get (){
+//   const data = await getAll(config.urlApi, 'posts')
+//   console.log(...data)
+// }
+// get()
+export default function ProductList({data}){
 
   const settings = {
     dots: true,
@@ -18,33 +32,13 @@ export default function ProductList(){
         <h2>Products</h2>
         <div>
         <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
+          {
+            data.map(el=>
+              (
+                <SliderItem data={el}></SliderItem>
+              )
+            )
+          }
         </Slider>
         </div>
     </Layout>

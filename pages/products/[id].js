@@ -1,10 +1,11 @@
-import { Layout } from '../../components/Layout/layout';
-import { getAll, getAllIds, getById } from './../../lib/products';
+import Layout from '../../components/Layout/layout';
 import ProductItem from './ProductsItem/productItem';
 
-const url = ' http://localhost:3004'
-export async function getStaticPaths() {
+import { getAllIds, getById } from './../../lib/products';
 
+import { config } from '../../config';
+
+export async function getStaticPaths() {
   const paths = await getAllIds()
   return {
     paths,
@@ -12,22 +13,19 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps({ params }) {
-
-  const product = await getById(params.id, url, "posts")
-
-  const [id] = product;
-  console.log(id.id)
-  return {
-    props: {
-      product
+  const product = await getById(params.id, config.urlApi, "posts")
+    return {
+      props: {
+        product
+      }
     }
-  }
 }
 export default function Product({product}){
-  const [p] = product;
+  const [item] = product;
+
   return(
     <Layout>
-      <ProductItem data={p}></ProductItem>
+      <ProductItem data={item}></ProductItem>
     </Layout>
   )
 }
