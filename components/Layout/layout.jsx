@@ -6,10 +6,12 @@ import styles from './layout.module.css'
 import styled from 'styled-components'
 
 const Header = styled.header`
-  text-align: center;
-  margin: 0 auto;
   width: 100%;
-  max-width: 250px;
+  height: 80px;
+  border-bottom: 1px solid #ccc;
+
+  display: flex;
+  align-items: center;
 `
 const Main = styled.main`
   width: 100%;
@@ -28,11 +30,16 @@ export default function Layout({children, titleSite}){
         <title>{titleSite}</title>
         
       </Head>
-      <Header>
+      
+     
+        <div className={styles.mainWrapper}>
+        <Header>
         <Navigation></Navigation>
       </Header>
-     
-      <Main>{children}</Main>
+      <Main>
+        {children}
+        </Main>
+        </div>
     </div>
   )
 }

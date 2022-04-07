@@ -14,7 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+ul{
+  padding-left:0;
+}
 .p-btn{
   width: 150px;
 }
+
 

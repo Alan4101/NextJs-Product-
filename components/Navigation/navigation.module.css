@@ -3,16 +3,17 @@
 }
 .navWrapper{
   display: flex;
-  justify-content:space-between;
+  justify-content:flex-start;
   flex-direction: row;
 
 }
 .navItem{
   list-style-type: none;
+  padding-right: 1rem;
 }
 .navItem>a{
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 700;
 
 }
 .navItem>a:hover{
