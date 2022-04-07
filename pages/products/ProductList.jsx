@@ -8,7 +8,7 @@ import { getAll } from "../../lib/products";
 import { config } from "../../config";
 
 export async function getServerSideProps() {
-  const data = await getAll(config.urlApi, "posts");
+  const data = await getAll(config.urlApi, "products");
   return {
     props: { data },
   };

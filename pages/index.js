@@ -7,10 +7,14 @@ import styled from "styled-components";
 import Layout from "../components/Layout";
 import StyleButton from "../components/StyleButton";
 
-import {
-  getItemsFromLocalStorage,
+import {getItemsFromLocalStorage,
   handlerClearLocalStorage,
 } from "../lib/utils";
+
+import { Link } from 'next/link';
+import { getById } from "../lib/products";
+import { config } from './../config';
+  
 
 const Title = styled.h1`
   margin: 0;
@@ -22,20 +26,35 @@ const Title = styled.h1`
 
 export default function Home() {
   const [state, setState] = useState([]);
-
+  const [product, setProduct] = useState({
+    id: '',
+    title:''
+  });
   useEffect(() => {
     const items = getItemsFromLocalStorage("id");
-    if (items) {
-      setState([...state, ...items]);
-    } else {
-      setState([]);
-    }
+    items ? setState([...state, ...items]) : setState([]);
+    
+    // const getProduct = async () =>{
+    //  for (let i = 0; i < items.length; i++) {
+    //   const data = await getById(items[i], config.urlApi, 'products')       
+    //   setProduct(prev => {
+    //     return{
+    //       ...prev,
+    //       id: data[0].id,
+    //       title: data[0].title
+    //     }
+    //   })
+    //   }
+    // }
+    // getProduct()
+   
   }, []);
 
   const clearLocalStorageIds = () => {
     setState([]);
     handlerClearLocalStorage("id");
   };
+
   return (
     <Layout titleSite="Home">
       <div className={styles.container}>
@@ -44,20 +63,20 @@ export default function Home() {
           <p className={styles.description}>Bookmarks</p>
 
           <div className={styles.grid}>
-            {state.length ? (
-              state.map((el) => (
-                <a
-                  key={el}
-                  href="https://nextjs.org/docs"
-                  className={styles.card}
-                >
-                  <h2>{el} &rarr;</h2>
-                  <p>ss</p>
-                </a>
-              ))
-            ) : (
-              <p>You don`t hane a bookmarks.</p>
-            )}
+            {
+              state.length ? (
+                state.map((el) => (
+                    <a
+                    key={el}
+                    className={styles.card}
+                  >
+                    <h2>{el} &rarr;</h2>
+                  </a>
+                ))
+              ) : (
+                <p>You don`t hane a bookmarks.</p>
+              )
+            }
           </div>
           <StyleButton handler={clearLocalStorageIds} data="id">
             Clear bookmarks

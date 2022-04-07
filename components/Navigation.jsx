@@ -7,13 +7,13 @@ export default function Navigation() {
     <nav className={cls.nav}>
       <ul className={cls.navWrapper}>
         <li className={cls.navItem}>
-          <Link href="/products/product-list">
-            <a>Product list</a>
+          <Link href="/">
+            <a>Home</a>
           </Link>
         </li>
         <li className={cls.navItem}>
-          <Link href="/">
-            <a>Home</a>
+          <Link href="/products/ProductList">
+            <a>Products</a>
           </Link>
         </li>
       </ul>
