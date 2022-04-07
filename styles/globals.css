@@ -14,11 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
-ul{
-  padding-left:0;
+ul {
+  padding-left: 0;
 }
-.p-btn{
+.p-btn {
   width: 150px;
 }
-
-

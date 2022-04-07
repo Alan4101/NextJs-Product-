@@ -1,4 +1,4 @@
-import styles from './productsItem.module.css'
+import styles from '../styles/ProductsItem.module.css'
 
 export default function ProductItem({data , addToBookmarks}){
 

@@ -4,8 +4,13 @@ import styles from "../styles/Home.module.css";
 
 import styled from "styled-components";
 
-import Layout from "../components/Layout/layout";
-import { getItemsFromLocalStorage } from "../lib/utils";
+import Layout from "../components/Layout";
+import StyleButton from "../components/StyleButton";
+
+import {
+  getItemsFromLocalStorage,
+  handlerClearLocalStorage,
+} from "../lib/utils";
 
 const Title = styled.h1`
   margin: 0;
@@ -19,14 +24,18 @@ export default function Home() {
   const [state, setState] = useState([]);
 
   useEffect(() => {
-    const items = getItemsFromLocalStorage();
-    if(items){
+    const items = getItemsFromLocalStorage("id");
+    if (items) {
       setState([...state, ...items]);
-    }else{
-      setState([])
+    } else {
+      setState([]);
     }
   }, []);
 
+  const clearLocalStorageIds = () => {
+    setState([]);
+    handlerClearLocalStorage("id");
+  };
   return (
     <Layout titleSite="Home">
       <div className={styles.container}>
@@ -35,22 +44,24 @@ export default function Home() {
           <p className={styles.description}>Bookmarks</p>
 
           <div className={styles.grid}>
-
-            { state.length ? 
-            state.map((el) => (
-              <a
-                key={el}
-                href="https://nextjs.org/docs"
-                className={styles.card}
-              >
-                <h2>{el} &rarr;</h2>
-                <p>ss</p>
-              </a>
-            ))
-            :
-            (<p>You don`t hane a bookmarks.</p>)
-          }
+            {state.length ? (
+              state.map((el) => (
+                <a
+                  key={el}
+                  href="https://nextjs.org/docs"
+                  className={styles.card}
+                >
+                  <h2>{el} &rarr;</h2>
+                  <p>ss</p>
+                </a>
+              ))
+            ) : (
+              <p>You don`t hane a bookmarks.</p>
+            )}
           </div>
+          <StyleButton handler={clearLocalStorageIds} data="id">
+            Clear bookmarks
+          </StyleButton>
         </main>
       </div>
     </Layout>

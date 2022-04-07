@@ -1,14 +1,11 @@
 import Link from "next/link";
-import { handlerAddToBookmarks } from "../../lib/utils";
+import { handlerAddToBookmarks } from "../lib/utils";
 
-import styles from "./sliderItem.module.css";
+import styles from ".././styles/SliderItem.module.css";
 import styled from "styled-components";
-import ButtonAddToBookmarks from "../ButtonAddToBookmarks";
+import StyleButton from "./StyleButton";
 
-export default function SliderItem({ data }) {
-  const { id, title, img, body } = data;
-
-  const Paragraph = styled.p`
+const Paragraph = styled.p`
     display: block;
     height: 100px;
     overflow: hidden;
@@ -20,6 +17,10 @@ export default function SliderItem({ data }) {
       height: auto;
     }
   `;
+export default function SliderItem({ data }) {
+  const { id, title, img, body } = data;
+
+  
 
   return (
     <div className={styles.sliderItem}>
@@ -34,7 +35,9 @@ export default function SliderItem({ data }) {
             </a>
           </Link>
           <Paragraph>{body}</Paragraph>
-          <ButtonAddToBookmarks handler={handlerAddToBookmarks} id={id}>Add to bookmarks</ButtonAddToBookmarks>
+          <StyleButton handler={handlerAddToBookmarks} id={id}>
+            Add to bookmarks
+          </StyleButton>
         </div>
       </div>
     </div>

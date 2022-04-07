@@ -1,23 +1,18 @@
-.nav{
-  
-}
-.navWrapper{
+.navWrapper {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   flex-direction: row;
-
 }
-.navItem{
+.navItem {
   list-style-type: none;
   padding-right: 1rem;
 }
-.navItem>a{
+.navItem > a {
   font-size: 24px;
   font-weight: 700;
-
 }
-.navItem>a:hover{
+.navItem > a:hover {
   text-decoration: underline;
   text-decoration-color: aquamarine;
-  transition: all .5s linear;
+  transition: all 0.5s linear;
 }
