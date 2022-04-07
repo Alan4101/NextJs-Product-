@@ -10,6 +10,7 @@ export default function Navigation(){
         <Link href="/products/product-list"><a>Product list</a></Link>
       </li>
       <li className={cls.navItem}>
+
         <Link href="/"><a>Home</a></Link>
       </li>
     </ul>

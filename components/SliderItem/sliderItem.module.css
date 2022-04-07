@@ -1,24 +1,26 @@
-.sliderItem{
- 
-}
-.sliderWrapper{
-  box-shadow: 1px 1px 14px -4px rgba(0,0,0,0.75);
+.sliderWrapper {
+  box-shadow: 1px 1px 14px -4px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  max-height: 100%;
+  margin: 0 auto;
   padding: 1rem;
   margin: 1rem;
 }
-.imgBlock{
+.imgBlock {
   width: 200px;
   height: 200px;
   text-align: center;
   margin: 0 auto;
 }
-.imgBlock>img{
+.imgBlock > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.sliderLink:hover{
+
+.sliderLink:hover {
+  color: rgb(34, 180, 132);
   text-decoration: underline;
   text-decoration-color: aquamarine;
-  transition: all .5s linear;
+  transition: all 0.5s linear;
 }
