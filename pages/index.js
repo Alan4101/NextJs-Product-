@@ -1,20 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.css"
 
-import styled from "styled-components";
+import styled from "styled-components"
 
-import Layout from "../components/Layout";
-import StyleButton from "../components/StyleButton";
+import Layout from "../components/Layout"
+import StyleButton from "../components/StyleButton"
 
-import {getItemsFromLocalStorage,
+import {
+  getItemsFromLocalStorage,
   handlerClearLocalStorage,
-} from "../lib/utils";
+} from "../lib/utils"
 
-import { Link } from 'next/link';
-import { getById } from "../lib/products";
-import { config } from './../config';
-  
+import { getAll } from "../lib/products"
+import { config } from "./../config"
 
 const Title = styled.h1`
   margin: 0;
@@ -22,38 +21,36 @@ const Title = styled.h1`
   font-size: 4rem;
   text-align: center;
   text-decoration: underline;
-`;
+`
 
 export default function Home() {
-  const [state, setState] = useState([]);
-  const [product, setProduct] = useState({
-    id: '',
-    title:''
-  });
+  const [state, setState] = useState([])
+  const [product, setProduct] = useState([])
   useEffect(() => {
-    const items = getItemsFromLocalStorage("id");
-    items ? setState([...state, ...items]) : setState([]);
-    
-    // const getProduct = async () =>{
-    //  for (let i = 0; i < items.length; i++) {
-    //   const data = await getById(items[i], config.urlApi, 'products')       
-    //   setProduct(prev => {
-    //     return{
-    //       ...prev,
-    //       id: data[0].id,
-    //       title: data[0].title
-    //     }
-    //   })
-    //   }
-    // }
-    // getProduct()
-   
-  }, []);
+    const items = getItemsFromLocalStorage("id")
+    items ? setState([...state, ...items]) : setState([])
 
+    const getProduct = async () => {
+      const data = await getAll(config.urlApi, "products")
+      const _data = []
+      for (let i = 0; i < state.length; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if (data[j].id === state[i]) {
+            _data.push(data[j])
+          }
+        }
+      }
+
+      setProduct(_data)
+    }
+
+    getProduct()
+  }, [])
+  console.log(product)
   const clearLocalStorageIds = () => {
-    setState([]);
-    handlerClearLocalStorage("id");
-  };
+    setState([])
+    handlerClearLocalStorage("id")
+  }
 
   return (
     <Layout titleSite="Home">
@@ -63,20 +60,15 @@ export default function Home() {
           <p className={styles.description}>Bookmarks</p>
 
           <div className={styles.grid}>
-            {
-              state.length ? (
-                state.map((el) => (
-                    <a
-                    key={el}
-                    className={styles.card}
-                  >
-                    <h2>{el} &rarr;</h2>
-                  </a>
-                ))
-              ) : (
-                <p>You don`t hane a bookmarks.</p>
-              )
-            }
+            {state.length ? (
+              state.map((el) => (
+                <a key={el} className={styles.card}>
+                  <h2>{el} &rarr;</h2>
+                </a>
+              ))
+            ) : (
+              <p>You don`t have a bookmarks.</p>
+            )}
           </div>
           <StyleButton handler={clearLocalStorageIds} data="id">
             Clear bookmarks
@@ -84,5 +76,5 @@ export default function Home() {
         </main>
       </div>
     </Layout>
-  );
+  )
 }
