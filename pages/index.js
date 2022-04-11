@@ -14,6 +14,7 @@ import {
 
 import { getAll } from "../lib/products"
 import { config } from "./../config"
+import Link  from 'next/link';
 
 const Title = styled.h1`
   margin: 0;
@@ -46,7 +47,6 @@ export default function Home() {
 
     getProduct()
   }, [])
-  console.log(product)
   const clearLocalStorageIds = () => {
     setState([])
     handlerClearLocalStorage("id")
@@ -62,9 +62,12 @@ export default function Home() {
           <div className={styles.grid}>
             {state.length ? (
               state.map((el) => (
-                <a key={el} className={styles.card}>
+                <Link key={el} href="/products/[id]" as={`/products/${el}`}>
+                   <a  className={styles.card}>
                   <h2>{el} &rarr;</h2>
                 </a>
+                </Link>
+               
               ))
             ) : (
               <p>You don`t have a bookmarks.</p>
