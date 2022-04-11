@@ -27,26 +27,38 @@ const Title = styled.h1`
 export default function Home() {
   const [state, setState] = useState([])
   const [product, setProduct] = useState([])
+  const [bookmarks, setBookmarks] = useState([])
+
   useEffect(() => {
     const items = getItemsFromLocalStorage("id")
     items ? setState([...state, ...items]) : setState([])
 
     const getProduct = async () => {
       const data = await getAll(config.urlApi, "products")
-      const _data = []
-      for (let i = 0; i < state.length; i++) {
-        for (let j = 0; j < data.length; j++) {
-          if (data[j].id === state[i]) {
-            _data.push(data[j])
-          }
-        }
-      }
-
-      setProduct(_data)
+      setProduct(data)
     }
 
+
     getProduct()
+    
   }, [])
+
+  useEffect(()=>{
+    const productFilteredData = filterProduct(state, product)
+    setBookmarks(productFilteredData)
+  },[product, state])
+
+  const filterProduct = (dataFromLocalStorage, dataFromApi)=>{
+    const _data = []
+    for (let i = 0; i < dataFromLocalStorage.length; i++) {
+      for (let j = 0; j < dataFromApi.length; j++) {
+        if (dataFromApi[j].id === dataFromLocalStorage[i]) {
+           _data.push(dataFromApi[j])
+        }
+      }
+    }
+    return _data;
+  }
   const clearLocalStorageIds = () => {
     setState([])
     handlerClearLocalStorage("id")
@@ -61,10 +73,10 @@ export default function Home() {
 
           <div className={styles.grid}>
             {state.length ? (
-              state.map((el) => (
-                <Link key={el} href="/products/[id]" as={`/products/${el}`}>
+              bookmarks.map((el) => (
+                <Link key={el.id} href="/products/[id]" as={`/products/${el.id}`}>
                    <a  className={styles.card}>
-                  <h2>{el} &rarr;</h2>
+                  <h2>{el.title} &rarr;</h2>
                 </a>
                 </Link>
                
